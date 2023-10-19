@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Vendor extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +16,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'first_name',
         'last_name',
         'email',
@@ -46,7 +44,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get orders associated with the user.
+     * Get orders associated with the vendor.
      *
      * @return HasMany
      */
@@ -56,12 +54,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Get daily_reports associated with the user
+     * Get products associated with the vendor.
      *
      * @return HasMany
      */
-    public function delayReports(): HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(DelayReport::class);
+        return $this->hasMany(Product::class);
     }
 }

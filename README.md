@@ -34,8 +34,15 @@ DB_PASSWORD=
 ### Open app container shell
 `docker exec -it delay-system-app bash`
 
+#### Install vendors
+`composer install`
+
 #### Generate App key
 `php artisan key:generate`
 
+#### Run migrations and seed the table
+`php artisan migrate --seed`
 
+#### Test the application
+`php artisan test`
 

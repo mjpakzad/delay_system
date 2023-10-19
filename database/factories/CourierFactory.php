@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Courier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<Courier>
  */
-class UserFactory extends Factory
+class CourierFactory extends Factory
 {
-    protected $model = User::class;
+    protected $model = Courier::class;
 
     /**
      * Define the model's default state.
@@ -25,6 +25,7 @@ class UserFactory extends Factory
             'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'mobile' => fake()->unique()->phoneNumber(),
             'password' => bcrypt('P@ssW0rd'),
             'remember_token' => Str::random(10),
         ];

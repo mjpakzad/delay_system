@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class OrderProductTest extends TestCase

@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Courier extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +19,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'mobile',
         'password',
     ];
 
@@ -46,22 +44,22 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get orders associated with the user.
-     *
-     * @return HasMany
-     */
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    /**
-     * Get daily_reports associated with the user
+     * Get daily_reports associated with the courier
      *
      * @return HasMany
      */
     public function delayReports(): HasMany
     {
         return $this->hasMany(DelayReport::class);
+    }
+
+    /**
+     * Get trips associated with the courier.
+     *
+     * @return HasMany
+     */
+    public function trips(): HasMany
+    {
+        return $this->hasMany(Trip::class);
     }
 }
