@@ -28,3 +28,12 @@ storage/logs
 .idea
 
 .DS_Store
+
+/.phpunit.cache
+/public/build
+.env.backup
+.env.production
+auth.json
+/.fleet
+/.idea
+/.vscode
