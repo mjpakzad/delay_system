@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\DelayReporitoryInterface;
 use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\DelayRepository;
 use App\Repositories\OrderRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +16,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(DelayReporitoryInterface::class, DelayRepository::class);
     }
 
     /**

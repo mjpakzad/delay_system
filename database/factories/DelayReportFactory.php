@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\DelayStatus;
 use App\Models\Courier;
 use App\Models\DelayReport;
 use App\Models\Order;
@@ -26,6 +27,7 @@ class DelayReportFactory extends Factory
             'order_id' => Order::factory()->create()->id,
             'user_id' => User::factory()->create()->id,
             'courier_id' => Courier::factory()->create()->id,
+            'status' => fake()->randomElement(DelayStatus::values()),
         ];
     }
 }

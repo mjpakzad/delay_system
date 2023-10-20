@@ -46,3 +46,11 @@ DB_PASSWORD=
 #### Test the application
 `php artisan test`
 
+### APIs
+
+#### Orders List
+[Get] http://127.0.0.1:8000/api/orders
+
+#### Report Delay
+[Post] https://127.0.0.1:8000/api/orders/{order}/delay-report
+user email and password.

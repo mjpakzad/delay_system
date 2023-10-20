@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DelayStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,7 @@ class DelayReport extends Model
         'order_id',
         'user_id',
         'courier_id',
+        'status',
     ];
 
     /**
@@ -49,5 +51,27 @@ class DelayReport extends Model
     public function courier(): BelongsTo
     {
         return $this->belongsTo(Courier::class);
+    }
+
+    /**
+     * A scope to determine the order status.
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeProcessed($query)
+    {
+        return $query->whereIn('status', [DelayStatus::DELIVERED, DelayStatus::FAILED, DelayStatus::INCREASE_DELIVERY_TIME]);
+    }
+
+    /**
+     * A scope to determine the order status.
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeProcessing($query)
+    {
+        return $query->whereNotIn('status', [DelayStatus::DELIVERED, DelayStatus::FAILED, DelayStatus::INCREASE_DELIVERY_TIME]);
     }
 }

@@ -39,6 +39,15 @@ class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
+     * @param array $parameters
+     * @return Model
+     */
+    public function create(array $parameters): Model
+    {
+        return $this->getModel()->query()->create($parameters);
+    }
+
+    /**
      * @param Builder $models
      * @param array $queries
      * @return Builder

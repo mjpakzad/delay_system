@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('orders')->name('orders.')->group(function () {
     Route::apiResource('/', OrderController::class)->only('index');
+    Route::post('{order}/delay-report', [\App\Http\Controllers\DelayController::class, 'report'])->name('delays.report');
 });
