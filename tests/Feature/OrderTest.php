@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Agent;
 use App\Models\Order;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -65,5 +66,30 @@ class OrderTest extends TestCase
         $order = Order::factory()->create();
         $response = $this->getJson(route('orders.index'));
         $response->assertJsonFragment(['created_at' => $order->created_at]);
+    }
+
+    /** @test */
+    public function it_not_assigned_with_wrong_agent_email()
+    {
+        $response = $this->patchJson(route('orders.assign-to-me', ['email' => 'jump@google.com']));
+        $response->assertStatus(404);
+    }
+
+    /** @test */
+    public function it_does_not_assign_if_agent_has_another_processing_order()
+    {
+        $agent = Agent::factory()->create();
+        $order = Order::factory()->create(['agent_id' => $agent->id]);
+        $response = $this->patchJson(route('orders.assign-to-me', ['email' => $agent->email]));
+        $response->assertJsonFragment(['message' => 'You have an order that need to process.']);
+    }
+
+    /** @test */
+    public function it_assign_order_to_agent()
+    {
+        $agent = Agent::factory()->create();
+        $order = Order::factory()->create();
+        $response = $this->patchJson(route('orders.assign-to-me', ['email' => $agent->email]));
+        $response->assertJsonFragment(['message' => 'An order assign to you.']);
     }
 }

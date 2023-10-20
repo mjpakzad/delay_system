@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Enums\TripStatus;
+use App\Models\Agent;
 use App\Models\Order;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 
@@ -85,5 +86,39 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     public function processing(Order $order): bool
     {
         return $order->delayReports()->processing()->exists();
+    }
+
+    /**
+     * Determine if an agent has order(s).
+     *
+     * @param Agent $agent
+     * @return bool
+     */
+    public function hasOrder(Agent $agent): bool
+    {
+        return Order::query()->where('agent_id', $agent->id)->exists();
+    }
+
+    /**
+     * Determine if there is an order to assign.
+     *
+     * @return bool
+     */
+    public function IsOrderToAssign(): bool
+    {
+        return Order::query()->unassigned()->processing()->exists();
+    }
+
+    /**
+     * Assign first unassigned order to the specific agent.
+     *
+     * @param Agent $agent
+     * @return Order
+     */
+    public function assignOrder(Agent $agent): Order
+    {
+        $order = Order::query()->oldest()->unassigned()->processing()->first();
+        $order->update(['agent_id' => $agent->id]);
+        return $order;
     }
 }

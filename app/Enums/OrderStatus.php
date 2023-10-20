@@ -37,25 +37,25 @@ enum OrderStatus: int
     /**
      * The order has been handed over to the courier for delivery.
      */
-    case HANDED_OVER_TO_COURIER = 60;
+    case HANDED_OVER_TO_COURIER = 50;
 
     /**
      * The order has been delivered successfully.
      */
-    case DELIVERED = 70;
+    case DELIVERED = 60;
 
     /**
      * Payment for the order has failed.
      */
-    case PAYMENT_FAILED = 80;
+    case PAYMENT_FAILED = 70;
 
     /**
      * The order failed.
      */
-    case FAILED = 90;
+    case FAILED = 80;
 
     /**
      * The order canceled.
      */
-    case CANCELED = 100;
+    case CANCELED = 90;
 }

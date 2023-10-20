@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderCollection;
-use App\Models\Order;
+use App\Models\Agent;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -23,34 +24,28 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Assign an order to me.
      */
-    public function store(Request $request)
+    public function assignToMe(Request $request)
     {
-        //
-    }
+        $agent = Agent::where('email', $request->input('email'))->firstOrFail();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if($this->orderRepository->hasOrder($agent)) {
+           return response()->json([
+               'message' => 'You have an order that need to process.',
+           ]);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if(!$this->orderRepository->IsOrderToAssign()) {
+            return response()->json([
+                'message' => 'There is no order with delay.',
+            ]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $order = $this->orderRepository->assignOrder($agent);
+
+        return response()->json([
+            'message' => 'An order assign to you.',
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -107,5 +108,31 @@ class Order extends Model
     public function trips(): HasMany
     {
         return $this->hasMany(Trip::class);
+    }
+
+    /**
+     * Scope to determine orders that doesn't have agent
+     * @param $query
+     * @return mixed
+     */
+    public function scopeUnassigned($query)
+    {
+        return $query->whereNull('agent_id');
+    }
+
+    /**
+     * Scope to select orders that user still waited for them.
+     * @param $query
+     * @return mixed
+     */
+    public function scopeProcessing($query)
+    {
+        return $query->whereIn('status', [
+            OrderStatus::PAYMENT_PENDING->value,
+            OrderStatus::PAID->value,
+            OrderStatus::COLLECTING->value,
+            OrderStatus::SENT->value,
+            OrderStatus::HANDED_OVER_TO_COURIER,
+        ]);
     }
 }

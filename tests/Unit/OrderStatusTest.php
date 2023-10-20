@@ -15,11 +15,11 @@ class OrderStatusTest extends TestCase
             'PAID' => 20,
             'COLLECTING' => 30,
             'SENT' => 40,
-            'HANDED_OVER_TO_COURIER' => 60,
-            'DELIVERED' => 70,
-            'PAYMENT_FAILED' => 80,
-            'FAILED' => 90,
-            'CANCELED' => 100,
+            'HANDED_OVER_TO_COURIER' => 50,
+            'DELIVERED' => 60,
+            'PAYMENT_FAILED' => 70,
+            'FAILED' => 80,
+            'CANCELED' => 90,
         ];
         $this->assertEquals($statuses, OrderStatus::options());
     }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
+use App\Models\Agent;
 use App\Models\Order;
 
 interface OrderRepositoryInterface
@@ -17,4 +18,10 @@ interface OrderRepositoryInterface
     public function processed(Order $order): bool;
 
     public function processing(Order $order): bool;
+
+    public function hasOrder(Agent $agent): bool;
+
+    public function IsOrderToAssign(): bool;
+
+    public function assignOrder(Agent $agent): Order;
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DelayController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::prefix('orders')->name('orders.')->group(function () {
     Route::apiResource('/', OrderController::class)->only('index');
-    Route::post('{order}/delay-report', [\App\Http\Controllers\DelayController::class, 'report'])->name('delays.report');
+    Route::post('{order}/delay-report', [DelayController::class, 'report'])->name('delays.report');
+    Route::patch('assign-to-me', [OrderController::class, 'assignToMe'])->name('assign-to-me');
 });
