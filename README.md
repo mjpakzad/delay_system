@@ -52,5 +52,14 @@ DB_PASSWORD=
 [Get] http://127.0.0.1:8000/api/orders
 
 #### Report Delay
-[Post] https://127.0.0.1:8000/api/orders/{order}/delay-report
-user email and password.
+[Post] http://127.0.0.1:8000/api/orders/{order}/delay-report <br>
+Agent email is required
+
+### Assign order to me
+[Patch] http://127.0.0.1:8000/api/orders/assign-to-me
+
+#### List of vendors sorted by total of delay time
+[Get] http://127.0.0.1:8000/api/vendors
+
+### Postman Collection
+A postman collection (Snappfood.postman_collection.json) placed in the root of project.
