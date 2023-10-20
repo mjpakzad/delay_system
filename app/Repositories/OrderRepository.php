@@ -71,6 +71,18 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     }
 
     /**
+     * Add delivery_time to the current delay_time.
+     *
+     * @param Order $order
+     * @param int $delivery_time
+     * @return bool
+     */
+    public function increaseDelayTime(Order $order, int $delivery_time): bool
+    {
+        return $order->increment('delay_time', $delivery_time);
+    }
+
+    /**
      * @param Order $order
      * @return bool
      */

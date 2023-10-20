@@ -14,7 +14,7 @@ use Tests\TestCase;
 class DelayTest extends TestCase
 {
     /** @test */
-    public function it_stop_reporting_delay_when_not_have_delay()
+    public function it_stop_reporting_delay_when_not_have_delay(): void
     {
         $order = Order::factory()->create();
         $response = $this->postJson(route('orders.delays.report', $order->id));
@@ -22,7 +22,7 @@ class DelayTest extends TestCase
     }
 
     /** @test */
-    public function it_needs_to_process_another_report_first()
+    public function it_needs_to_process_another_report_first(): void
     {
         $order = Order::factory()->create(['created_at' => now()->subMinutes(20), 'delivery_time' => 5]);
         $delay = DelayReport::factory()->create(['order_id' => $order->id, 'status' => DelayStatus::DELAY]);
@@ -31,7 +31,7 @@ class DelayTest extends TestCase
     }
 
     /** @test */
-    public function it_increase_delivery_time_when_has_trip()
+    public function it_increase_delivery_time_when_has_trip(): void
     {
         $order = Order::factory()->create(['created_at' => now()->subMinutes(20), 'delivery_time' => 5]);
         $trip = Trip::factory()->create(['order_id' => $order->id, 'status' => TripStatus::PICKED]);
@@ -42,7 +42,7 @@ class DelayTest extends TestCase
     }
 
     /** @test */
-    public function it_save_report_if_has_delay()
+    public function it_save_report_if_has_delay(): void
     {
         $order = Order::factory()->create(['created_at' => now()->subMinutes(20), 'delivery_time' => 5]);
         $response = $this->postJson(route('orders.delays.report', $order->id));

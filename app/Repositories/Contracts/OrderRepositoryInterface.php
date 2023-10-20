@@ -15,6 +15,8 @@ interface OrderRepositoryInterface
 
     public function increaseDeliveryTime(Order $order, int $delivery_time): bool;
 
+    public function increaseDelayTime(Order $order, int $delivery_time): bool;
+
     public function processed(Order $order): bool;
 
     public function processing(Order $order): bool;

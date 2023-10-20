@@ -19,7 +19,7 @@ class OrderTest extends TestCase
     public function orders_table_has_expected_columns()
     {
         $this->assertTrue(Schema::hasColumns('orders', [
-            'id', 'vendor_id', 'user_id', 'agent_id', 'delivery_time', 'content', 'status', 'total_price', 'created_at', 'updated_at',
+            'id', 'vendor_id', 'user_id', 'agent_id', 'delivery_time', 'delay_time', 'content', 'status', 'total_price', 'created_at', 'updated_at',
         ]), 1);
     }
 

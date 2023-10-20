@@ -14,12 +14,12 @@ class OrderTest extends TestCase
     use DatabaseTransactions;
 
     /**
-     * Cities list showing in the correct structure.
+     * Orders list showing in the correct structure.
      *
      * @test
      * @return void
      */
-    public function it_has_correct_response_structure_when_showing_cities()
+    public function it_has_correct_response_structure_when_showing_orders(): void
     {
         $order = Order::factory()->create();
         $response = $this->getJson(route('orders.index'));
@@ -61,7 +61,7 @@ class OrderTest extends TestCase
      * @test
      * @return void
      */
-    public function it_shows_all_orders()
+    public function it_shows_all_orders(): void
     {
         $order = Order::factory()->create();
         $response = $this->getJson(route('orders.index'));
@@ -69,14 +69,14 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_not_assigned_with_wrong_agent_email()
+    public function it_not_assigned_with_wrong_agent_email(): void
     {
         $response = $this->patchJson(route('orders.assign-to-me', ['email' => 'jump@google.com']));
         $response->assertStatus(404);
     }
 
     /** @test */
-    public function it_does_not_assign_if_agent_has_another_processing_order()
+    public function it_does_not_assign_if_agent_has_another_processing_order(): void
     {
         $agent = Agent::factory()->create();
         $order = Order::factory()->create(['agent_id' => $agent->id]);
@@ -85,7 +85,7 @@ class OrderTest extends TestCase
     }
 
     /** @test */
-    public function it_assign_order_to_agent()
+    public function it_assign_order_to_agent(): void
     {
         $agent = Agent::factory()->create();
         $order = Order::factory()->create();

@@ -29,6 +29,7 @@ class OrderFactory extends Factory
             'user_id' => User::factory(),
             'agent_id' => Agent::factory(),
             'delivery_time' => fake()->numberBetween(1, 180),
+            'delay_time' => fake()->numberBetween([1, 150]),
             'content' => fake()->text(),
             'status' => fake()->randomElement(OrderStatus::values()),
             'total_price' => rand(100, 150000),

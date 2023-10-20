@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DelayController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::prefix('orders')->name('orders.')->group(function () {
     Route::post('{order}/delay-report', [DelayController::class, 'report'])->name('delays.report');
     Route::patch('assign-to-me', [OrderController::class, 'assignToMe'])->name('assign-to-me');
 });
+Route::apiResource('vendors', VendorController::class)->only('index');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Models\Traits\Scopes\DateTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     use HasFactory;
+    use DateTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,7 @@ class Order extends Model
         'user_id',
         'agent_id',
         'delivery_time',
+        'delay_time',
         'content',
         'status',
         'total_price',
@@ -36,6 +39,7 @@ class Order extends Model
      */
     protected $casts = [
         'delivery_time' => 'integer',
+        'delay_time' => 'integer',
         'status' => 'integer',
         'price' => 'integer',
     ];
@@ -51,7 +55,7 @@ class Order extends Model
     }
 
     /**
-     * Get delay_reports associated with the order
+     * Get delay_reports associated with the order.
      *
      * @return HasMany
      */

@@ -37,6 +37,7 @@ class DelayController extends Controller
         if($this->orderRepository->isOnTrip($order)) {
             $delivery_time = resolve(DeliveryTimeInterface::class)->getTime();
             $this->orderRepository->increaseDeliveryTime($order, $delivery_time);
+            $this->orderRepository->increaseDelayTime($order, $delivery_time);
             $delayRepository->create(['order_id' => $order->id, 'user_id' => $order->user_id, 'courier_id' => $order->trips()->first()?->courier_id, 'status' => DelayStatus::DELAY]);
             return response()->json([
                 'message' => 'Your report submitted and the your order will delivered until: ' . $order->delivered_at,
