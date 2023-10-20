@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,6 +38,16 @@ class Order extends Model
         'status' => 'integer',
         'price' => 'integer',
     ];
+
+    /**
+     * Get the order's delivered_at.
+     */
+    protected function deliveredAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->created_at->addMinutes($this->delivery_time),
+        );
+    }
 
     /**
      * Get delay_reports associated with the order

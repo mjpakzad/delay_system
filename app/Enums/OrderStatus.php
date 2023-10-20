@@ -2,6 +2,7 @@
 
 namespace App\Enums;
 
+use App\Enums\Traits\SwapTrait;
 use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Options;
 use ArchTech\Enums\Values;
@@ -11,6 +12,7 @@ enum OrderStatus: int
     use InvokableCases;
     use Values;
     use Options;
+    use SwapTrait;
 
     /**
      * The order is awaiting payment.
