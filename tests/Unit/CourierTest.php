@@ -5,11 +5,14 @@ namespace Tests\Unit;
 use App\Models\Courier;
 use App\Models\DelayReport;
 use App\Models\Trip;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class CourierTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function couriers_table_has_expected_columns()
     {

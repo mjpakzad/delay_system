@@ -4,11 +4,14 @@ namespace Tests\Unit;
 
 use App\Models\Agent;
 use App\Models\Order;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class AgentTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function agents_table_has_expected_columns()
     {

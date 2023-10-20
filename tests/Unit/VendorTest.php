@@ -5,11 +5,14 @@ namespace Tests\Unit;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Vendor;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class VendorTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function vendors_table_has_expected_columns()
     {

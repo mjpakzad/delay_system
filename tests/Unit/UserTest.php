@@ -4,11 +4,14 @@ namespace Tests\Unit;
 
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function users_table_has_expected_columns()
     {

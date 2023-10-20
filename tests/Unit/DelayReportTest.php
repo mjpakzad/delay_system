@@ -6,11 +6,14 @@ use App\Models\Courier;
 use App\Models\DelayReport;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class DelayReportTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /** @test */
     public function delay_reports_table_has_expected_columns()
     {
